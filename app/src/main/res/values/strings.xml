@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="helper_text">No Data found, Kindly add a city to watch weather report.</string>
+    <string name="home_title">Home</string>
+    <string name="clear_locations_menu_item">Clear Locations</string>
+    <string name="add_location_menu_item">Add Location</string>
+    <string name="help_menu_item">Help</string>
+    <string name="units_menu_item">Units</string>
+    <string name="metric_menu_sub_item">metric</string>
+    <string name="imperial_menu_sub_item">imperial</string>
+    <string name="domain_error">Unable to serve now , please try after sometime.</string>
+    <string name="image_button_delete_city_from_list">Image Button delete city from List</string>
+    <string name="standard_menu_sub_item">standard</string>
+    <string name="configuration_updated">Configuration Updated</string>
+    <string name="today_s_weather">Today\'s Weather</string>
+    <string name="temperature">Temperature</string>
+    <string name="humidity">Humidity</string>
+    <string name="winds">Winds</string>
+    <string name="rain_chances">Rain Chances</string>
+</resources>

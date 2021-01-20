@@ -1,0 +1,36 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/units"
+        android:title="@string/units_menu_item"
+        android:orderInCategory="100"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/standard"
+                android:title="@string/standard_menu_sub_item" />
+            <item
+                android:id="@+id/metric"
+                android:title="@string/metric_menu_sub_item" />
+            <item
+                android:id="@+id/imperial"
+                android:title="@string/imperial_menu_sub_item" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/add_location"
+        android:orderInCategory="101"
+        android:title="@string/add_location_menu_item"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/clear_locations"
+        android:orderInCategory="102"
+        android:title="@string/clear_locations_menu_item"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/help"
+        android:orderInCategory="103"
+        android:title="@string/help_menu_item"
+        app:showAsAction="never" />
+</menu>
