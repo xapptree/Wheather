@@ -54,4 +54,5 @@ dependencies {
     //Network
     /*Below library for networking call developed by myself @Akbar*/
     implementation 'com.github.xapptree:networkrunner:0.0.7'
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
 }

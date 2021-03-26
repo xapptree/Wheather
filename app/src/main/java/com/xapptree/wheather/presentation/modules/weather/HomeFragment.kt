@@ -2,6 +2,7 @@ package com.xapptree.wheather.presentation.modules.weather
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -30,11 +31,13 @@ class HomeFragment : Fragment(), CityAdapter.ICityAdapterClickListener {
         } else {
             throw RuntimeException("$context must implement HomeFragmentListener")
         }
+        Log.i("TAG LOG-HomeFragment", "OnAttach")
     }
 
     override fun onDetach() {
         super.onDetach()
         listener = null
+        Log.i("TAG LOG-HomeFragment", "OnDetach")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +46,7 @@ class HomeFragment : Fragment(), CityAdapter.ICityAdapterClickListener {
         viewModel = activity?.run {
             ViewModelProvider(this)[MainViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
-
+        Log.i("TAG LOG-HomeFragment", "OnCreate")
     }
 
     override fun onCreateView(
@@ -51,9 +54,38 @@ class HomeFragment : Fragment(), CityAdapter.ICityAdapterClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        Log.i("TAG LOG-HomeFragment", "OnCreateView")
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    override fun onStart() {
+        super.onStart()
+        Log.i("TAG LOG-HomeFragment", "OnStart")
+    }
+    override fun onResume() {
+        super.onResume()
+        Log.i("TAG LOG-HomeFragment", "OnResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("TAG LOG-HomeFragment", "OnPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i("TAG LOG-HomeFragment", "OnStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("TAG LOG-HomeFragment", "OnDestroy")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.i("TAG LOG-HomeFragment", "OnDestroyView")
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         app_toolbar.inflateMenu(R.menu.menu_weather)
@@ -122,6 +154,8 @@ class HomeFragment : Fragment(), CityAdapter.ICityAdapterClickListener {
             showMessage(getString(R.string.domain_error))
 
         })
+
+        Log.i("TAG LOG-HomeFragment", "OnViewCreated")
     }
 
     private fun loadAdapter(cities: ArrayList<City>) {

@@ -2,6 +2,7 @@ package com.xapptree.wheather.presentation.modules.weather
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,11 +24,13 @@ class CityFragment : Fragment() {
         } else {
             throw RuntimeException("$context must implement CityFragmentListener")
         }
+        Log.i("TAG LOG-CityFragment", "onAttach")
     }
 
     override fun onDetach() {
         super.onDetach()
         listener = null
+        Log.i("TAG LOG-CityFragment", "onDetach")
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +39,7 @@ class CityFragment : Fragment() {
         viewModel = activity?.run {
             ViewModelProvider(this)[MainViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
+        Log.i("TAG LOG-CityFragment", "OnCreate")
     }
 
     override fun onCreateView(
@@ -43,6 +47,7 @@ class CityFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        Log.i("TAG LOG-CityFragment", "OnCreateView")
         return inflater.inflate(R.layout.fragment_city, container, false)
     }
 
@@ -63,7 +68,36 @@ class CityFragment : Fragment() {
             tv_rain?.text = "${it?.clouds?.all} %"
 
         })
+        Log.i("TAG LOG-CityFragment", "onViewCreated")
+    }
 
+    override fun onStart() {
+        super.onStart()
+        Log.i("TAG LOG-CityFragment", "OnStart")
+    }
+    override fun onResume() {
+        super.onResume()
+        Log.i("TAG LOG-CityFragment", "OnResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("TAG LOG-CityFragment", "OnPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i("TAG LOG-CityFragment", "OnStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("TAG LOG-CityFragment", "OnDestroy")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.i("TAG LOG-CityFragment", "OnDestroyView")
     }
 
     interface CityFragmentListener{

@@ -1,7 +1,13 @@
 package com.xapptree.wheather.presentation.modules.weather
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.net.wifi.WifiManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -18,13 +24,40 @@ class MainActivity : AppCompatActivity(), HomeFragment.HomeFragmentListener ,
     }
     private lateinit var viewModel: MainViewModel
     private lateinit var dummyLocations:ArrayList<City>
+     lateinit var  wifiManager :WifiManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Log.i("TAG LOG-MainActivity", "OnCreate")
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
         createDummyData()
         viewModel.addCities(this, dummyLocations)
         addFragment(HomeFragment(), R.id.fragment_container, Fragments.HOME_FRAGMENT.title)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.i("TAG LOG-MainActivity", "OnStart")
+    }
+    override fun onResume() {
+        super.onResume()
+        Log.i("TAG LOG-MainActivity", "OnResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("TAG LOG-MainActivity", "OnPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i("TAG LOG-MainActivity", "OnStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("TAG LOG-MainActivity", "OnDestroy")
     }
 
     private fun createDummyData() {
@@ -39,6 +72,29 @@ class MainActivity : AppCompatActivity(), HomeFragment.HomeFragmentListener ,
         dummyLocations.add(City("Ooty","",""))
         dummyLocations.add(City("Vijayawada","",""))
         dummyLocations.add(City("Ongole","",""))
+
+
+        val wifiScanReceiver = object : BroadcastReceiver() {
+
+            override fun onReceive(context: Context, intent: Intent) {
+                val success = intent.getBooleanExtra(WifiManager.EXTRA_RESULTS_UPDATED, false)
+                if (success) {
+                    scanSuccess()
+                } else {
+                    scanFailure()
+                }
+            }
+        }
+
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)
+        this.registerReceiver(wifiScanReceiver, intentFilter)
+
+        val success = wifiManager.startScan()
+        if (!success) {
+            // scan failure handling
+            scanFailure()
+        }
     }
 
     /*Below functions should need to place in base class*/
@@ -94,10 +150,23 @@ class MainActivity : AppCompatActivity(), HomeFragment.HomeFragmentListener ,
     }
 
     override fun onBackPressed() {
+        Log.i("TAG LOG-MainActivity", "OnBackPressed")
         handleBackPress()
     }
 
     override fun cityFragmentBackClicked() {
         handleBackPress()
+    }
+
+    private fun scanSuccess() {
+        val results = wifiManager.scanResults
+        Log.i("TTT", results.toString())
+    }
+
+    private fun scanFailure() {
+        // handle failure: new scan did NOT succeed
+        // consider using old scan results: these are the OLD results!
+        val results = wifiManager.scanResults
+        Log.i("TTT", results.toString())
     }
 }

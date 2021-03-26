@@ -3,6 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="helper_text">No Data found, Kindly add a city to watch weather report.</string>
+    <string name="helper_text_smart">Devices not found, Kindly connect your AiThink devices with power supply.</string>
     <string name="home_title">Home</string>
     <string name="clear_locations_menu_item">Clear Locations</string>
     <string name="add_location_menu_item">Add Location</string>
